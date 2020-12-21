@@ -12,6 +12,8 @@
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
+/Assets/Chess\ Set/
+/Assets/JsonDotNet/
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
@@ -58,3 +60,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# VS Code
+.vscode
+
+UserSettings/
