@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Chessboard
+  - ChessPiece
+  - BoardTile
   layers:
   - Default
   - TransparentFX
@@ -21,12 +23,12 @@ TagManager:
   - 
   - 
   - 
+  - ChessPieces
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - BoardTiles
   - 
   - 
   - 

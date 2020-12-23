@@ -6,5 +6,7 @@ public enum LichessMessageType
 
     GameState,
 
-    ChatLine
+    ChatLine,
+
+    MoveResponse
 };

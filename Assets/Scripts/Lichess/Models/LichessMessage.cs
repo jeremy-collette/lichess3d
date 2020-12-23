@@ -10,5 +10,7 @@ public struct LichessMessage
 
     public ChatLineMessage? ChatLineMessage { get; set; }
 
+    public MoveResponseMessage? MoveResponseMessage { get; set; }
+
     public string Moves { get; set; }
 }

@@ -1,38 +1,72 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public class LichessClient : MonoBehaviour, ILichessClient
 {
+    public bool DisableLogin = false;
+
     private ConcurrentQueue<LichessMessage> messageQueue = new ConcurrentQueue<LichessMessage>();
 
     private Thread backgroundThread;
 
-    private Exception backgroundThreadException = null;
+    private string guiText = ":-)";
 
     private ILichessLoginRetriever lichessLoginRetriever;
 
     private LichessLogin lichessLogin;
+
+    private LichessMessage? lastGameStateMessage = null;
 
     public bool TryGetMessage(out LichessMessage message)
     {
         return this.messageQueue.TryDequeue(out message);
     }
 
+    public async void SendMove(string move)
+    {
+        if (this.DisableLogin
+            || this.lichessLoginRetriever == null)
+        {
+            return;
+        }
+
+        Debug.Log($"Sending move request {move}...");
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.lichessLogin.ApiKey);
+        var response = await client.PostAsync($"https://lichess.org/api/board/game/{this.lichessLogin.GameId}/move/{move}", content: null);
+        Debug.Log($"Response: {response.StatusCode}");
+
+        var moveMessage = new LichessMessage
+        {
+            MessageType = LichessMessageType.MoveResponse,
+            MoveResponseMessage = new MoveResponseMessage
+            {
+                IsSuccess = response.StatusCode == HttpStatusCode.OK
+            }
+        };
+        this.messageQueue.Enqueue(moveMessage);
+        this.guiText = $"[{DateTime.Now}]: Move " + (moveMessage.MoveResponseMessage.Value.IsSuccess ? "succeded!" : "failed!");
+    }
+
     public void Start()
     {
-        this.lichessLoginRetriever = GameObject.Find("MainMenu").GetComponent<ILichessLoginRetriever>();
+        this.lichessLoginRetriever = GameObject.Find("MainMenu")?.GetComponent<ILichessLoginRetriever>();
     }
 
     public void Update()
     {
-        if (!this.lichessLoginRetriever.TryGetLichessLogin(out this.lichessLogin))
+        if (this.DisableLogin
+            || this.lichessLoginRetriever == null
+            || !this.lichessLoginRetriever.TryGetLichessLogin(out this.lichessLogin))
         {
             // Wait until we have a login
             return;
@@ -43,17 +77,10 @@ public class LichessClient : MonoBehaviour, ILichessClient
             this.backgroundThread = new Thread(this.ReadDataStream);
             this.backgroundThread.Start();
         }
-
-        if (this.backgroundThreadException != null)
-        {
-            Debug.LogError(this.backgroundThreadException);
-            //throw this.backgroundThreadException;
-        }
     }
 
     void OnGUI()
     {
-
         var guiStyle = new GUIStyle
         {
             normal = new GUIStyleState
@@ -61,7 +88,7 @@ public class LichessClient : MonoBehaviour, ILichessClient
                 textColor = Color.black
             }
         };
-        GUI.Label(new Rect(0, 0, 200, 50), this.backgroundThreadException?.ToString() ?? ":-)", guiStyle);
+        GUI.Label(new Rect(0, 0, 200, 50), this.guiText, guiStyle);
     }
 
     private async void ReadDataStream()
@@ -103,9 +130,11 @@ public class LichessClient : MonoBehaviour, ILichessClient
                         {
                             case "gameFull":
                                 message = this.ParseFullGameMessage(json);
+                                lastGameStateMessage = message;
                                 break;
                             case "gameState":
                                 message = this.ParseGameStateMessage(json);
+                                lastGameStateMessage = message;
                                 break;
                             case "chatLine":
                                 message = this.ParseChatLineMessage(json);
@@ -115,6 +144,7 @@ public class LichessClient : MonoBehaviour, ILichessClient
 
                         }
 
+                        this.guiText = $"[{DateTime.Now}]: Successfully read Lichess message!";
                         this.messageQueue.Enqueue(message);
                     }
                 }
@@ -122,7 +152,7 @@ public class LichessClient : MonoBehaviour, ILichessClient
         }
         catch (Exception e)
         {
-            this.backgroundThreadException = e;
+            this.guiText = $"[{DateTime.Now}]: Exception: {e}";
         }
     }
 

@@ -2,5 +2,5 @@
 
 public struct BoardStateInput
 {
-    public List<string> Moves { get; set; }
+    public List<BoardMove> Moves { get; set; }
 }

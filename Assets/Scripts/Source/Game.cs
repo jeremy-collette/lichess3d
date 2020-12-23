@@ -15,20 +15,17 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        // Board state is a union of Lichess & player input
-        // (but Lichess takes precedence if it exists)
+        // Board state from Lichess
         if (!this.boardStateReader.TryGetBoardState(out var boardStateInput))
         {
             return;
         }
-        //Debug.Log($"Input board state: {JsonConvert.SerializeObject(boardStateInput)}");
 
-        // Update the board using both player & Lichess input (if it exists)
+        // Update the board using the input from Lichess
         var boardStateOutput = new BoardStateOutput
         {
             Moves = boardStateInput.Moves
         };
-        Debug.Log($"Output board state: {JsonConvert.SerializeObject(boardStateOutput)}");
         this.boardStateSetter.TrySetBoardState(boardStateOutput);
     }
 }
