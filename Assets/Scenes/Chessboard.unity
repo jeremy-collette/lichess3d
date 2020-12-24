@@ -992,6 +992,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7851398559354735255, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
+      propertyPath: m_Name
+      value: Knight White Left
+      objectReference: {fileID: 0}
+    - target: {fileID: -7851398559354735255, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
@@ -1061,7 +1065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3961755216846780762, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_Name
-      value: Bishop Black 2
+      value: Bishop Black Left
       objectReference: {fileID: 0}
     - target: {fileID: -3961755216846780762, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_Layer
@@ -1073,7 +1077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3927907785839292895, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_Name
-      value: Rook White 2
+      value: Rook White Left
       objectReference: {fileID: 0}
     - target: {fileID: -3927907785839292895, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_Layer
@@ -1122,6 +1126,10 @@ PrefabInstance:
     - target: {fileID: -2508564248034957760, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2405338641955520701, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
+      propertyPath: m_Name
+      value: Bishop White Left
       objectReference: {fileID: 0}
     - target: {fileID: -2405338641955520701, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_Layer
@@ -1217,7 +1225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 989437558258565456, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_Name
-      value: Rook Black 2
+      value: Rook Black Left
       objectReference: {fileID: 0}
     - target: {fileID: 989437558258565456, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_Layer
@@ -1401,7 +1409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9046509603811182778, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_Name
-      value: Knight Black 2
+      value: Knight Black Left
       objectReference: {fileID: 0}
     - target: {fileID: 9046509603811182778, guid: 333d9e0c2d0c22bb5ad021bc40a7a257, type: 3}
       propertyPath: m_Layer
@@ -5922,13 +5930,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.22361226, y: -0, z: -0, w: 0.9746783}
-  m_LocalPosition: {x: -0.08, y: 6.252, z: -11.206}
+  m_LocalRotation: {x: 0.36128056, y: -0, z: -0, w: 0.9324572}
+  m_LocalPosition: {x: -0.08, y: 8.4, z: -10.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 25.843, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 42.358, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6554,6 +6562,10 @@ GameObject:
   - component: {fileID: 1073877233}
   - component: {fileID: 1073877234}
   - component: {fileID: 1073877235}
+  - component: {fileID: 1073877239}
+  - component: {fileID: 1073877238}
+  - component: {fileID: 1073877237}
+  - component: {fileID: 1073877236}
   m_Layer: 0
   m_Name: Chessboard
   m_TagString: Untagged
@@ -6601,6 +6613,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1320f644bd4ff7d44b50ca3fe7d89847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1073877236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073877232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e27e2f3ea98f7346aa6ce48998943c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KingUi: {fileID: 144311194}
+  RookUi: {fileID: 1707819004}
+  KingDestinationUi:
+    AlphabeticalUi: 103
+    NumeralUi: 1
+  RookDestinationUi:
+    AlphabeticalUi: 102
+    NumeralUi: 1
+--- !u!114 &1073877237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073877232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e27e2f3ea98f7346aa6ce48998943c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KingUi: {fileID: 144311194}
+  RookUi: {fileID: 2050402825}
+  KingDestinationUi:
+    AlphabeticalUi: 99
+    NumeralUi: 1
+  RookDestinationUi:
+    AlphabeticalUi: 100
+    NumeralUi: 1
+--- !u!114 &1073877238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073877232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e27e2f3ea98f7346aa6ce48998943c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KingUi: {fileID: 352812310}
+  RookUi: {fileID: 1372074902}
+  KingDestinationUi:
+    AlphabeticalUi: 103
+    NumeralUi: 8
+  RookDestinationUi:
+    AlphabeticalUi: 102
+    NumeralUi: 8
+--- !u!114 &1073877239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073877232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e27e2f3ea98f7346aa6ce48998943c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KingUi: {fileID: 352812310}
+  RookUi: {fileID: 651246231}
+  KingDestinationUi:
+    AlphabeticalUi: 99
+    NumeralUi: 8
+  RookDestinationUi:
+    AlphabeticalUi: 100
+    NumeralUi: 8
 --- !u!1 &1082349432
 GameObject:
   m_ObjectHideFlags: 0

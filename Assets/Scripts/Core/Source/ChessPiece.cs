@@ -17,4 +17,9 @@ public class ChessPiece : MonoBehaviour, IChessPiece
     public PieceType PieceTypeUi;
 
     public GameObject InitialTileUi;
+
+    public bool Equals(IChessPiece other) =>
+        this.Player.Equals(other.Player)
+            && this.PieceType.Equals(other.PieceType)
+            && this.InitialTile.Equals(other.InitialTile);
 }

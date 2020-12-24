@@ -27,4 +27,6 @@ public class BoardTile : MonoBehaviour, IBoardTile
 
     public int NumeralUi;
 
+    public bool Equals(IBoardTile other) =>
+        this.Position.Equals(other.Position);
 };

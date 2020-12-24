@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Chessboard : MonoBehaviour, IChessboard
@@ -8,14 +10,19 @@ public class Chessboard : MonoBehaviour, IChessboard
 
     private IChessboardSeeder chessboardSeeder;
 
+    private List<ISpecialMoveHandler> specialMoveHandlers;
+
     void Start()
     {
         this.chessboardSeeder = this.gameObject.GetComponent<IChessboardSeeder>();
+        this.specialMoveHandlers = this.gameObject.GetComponents<ISpecialMoveHandler>().ToList();
         this.SeedChessboard();
     }
 
     public void Move(BoardPosition from, BoardPosition to)
     {
+        Debug.Log($"Processing move {from}{to}...");
+
         // Transform BoardPosition to chessboard index
         int fromX = from.Alphabetical - 'a';
         int fromY = from.Numeral - 1;
@@ -42,11 +49,22 @@ public class Chessboard : MonoBehaviour, IChessboard
         chessboard[toX, toY].CurrentPiece = piece;
         piece.CurrentTile = chessboard[toX, toY];
         piece.GameObject.transform.position = chessboard[toX, toY].GameObject.transform.position;
+
+        // Handle special moves
+        foreach (var specialMoveHandler in this.specialMoveHandlers)
+        {
+            specialMoveHandler.ProcessMove(this, piece, from, to);
+        }
     }
 
     public void Reset()
     {
         this.SeedChessboard();
+
+        foreach (var specialMoveHandler in this.specialMoveHandlers)
+        {
+            specialMoveHandler.Reset();
+        }
     }
 
     private void SeedChessboard()

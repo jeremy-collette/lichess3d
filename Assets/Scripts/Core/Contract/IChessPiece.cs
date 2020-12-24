@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-public interface IChessPiece
+public interface IChessPiece : IEquatable<IChessPiece>
 {
     PieceType PieceType { get; set; }
 

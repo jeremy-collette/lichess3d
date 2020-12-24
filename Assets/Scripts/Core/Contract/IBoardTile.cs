@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-public interface IBoardTile
+public interface IBoardTile : IEquatable<IBoardTile>
 {
     BoardPosition Position { get; set; }
 
