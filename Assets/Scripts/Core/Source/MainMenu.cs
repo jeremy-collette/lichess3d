@@ -9,12 +9,14 @@ public class MainMenu : MonoBehaviour, ILichessLoginRetriever
 
     private bool playButtonClicked = false;
 
+    private GameObject settingsButton;
+
     public void PlayButtonClicked()
     {
         this.playButtonClicked = true;
         this.gameObject.SetActive(false);
+        this.settingsButton.SetActive(true);
 
-        // TODO: move or abstract
         Time.timeScale = 1;
     }
 
@@ -38,8 +40,9 @@ public class MainMenu : MonoBehaviour, ILichessLoginRetriever
     {
         this.apiKeyText = GameObject.Find("ApiKeyInputText").GetComponent<Text>();
         this.gameIdText = GameObject.Find("GameIdInputText").GetComponent<Text>();
+        this.settingsButton = GameObject.Find("SettingsButton");
+        this.settingsButton.SetActive(false);
 
-        // TODO: move or abstract
         Time.timeScale = 0;
     }
 }
